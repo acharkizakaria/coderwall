@@ -3,7 +3,6 @@ rvm:
 - 2.1.5
 bundler_args: "--without development production autotest"
 services:
-- mongodb
 - redis-server
 before_install:
 - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.13.deb
@@ -15,9 +14,7 @@ before_install:
 before_script:
 - cp -f config/database.travis.yml config/database.yml
 - cp -f .env.example .env
-- bundle exec rake db:create:all
-- bundle exec rake db:schema:load
-- bundle exec rake db:migrate
+- bundle exec rake db:create:test
 - bundle exec rake db:test:prepare
 env:
   global:
